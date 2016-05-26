@@ -728,7 +728,7 @@ var render = function() {
     var delta = !!force;
 
 
-    var w = $("#infovis").width(), h = 600;
+    var w = $("#center-container").width(), h = 600;
     if (scheme != schemes[$("#colorScheme").val()]) {
         scheme = schemes[$("#colorScheme").val()];
         $("#linkColor").val(scheme["linkcolor"]);
