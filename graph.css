@@ -432,7 +432,7 @@ footer p.copyright {
 
 .leftpanelcontainer1 {
     position: absolute;
-    bottom: 100px;
+    bottom: 200px;
     left: 0;
     z-index: 2;
     border: 1px solid #ddd;
