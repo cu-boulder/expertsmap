@@ -8,10 +8,7 @@
 
      <link rel="stylesheet" href="complete.css">
 
-            <!-- Not sure what the following 2 css files were used for -->
-        <!--link rel="stylesheet" href="edit.css"-->
-        <!--link rel="stylesheet" href="screen.css"-->
-        <link rel="stylesheet" href="custom2.css">
+        <link rel="stylesheet" href="custom.css">
         <link  rel="stylesheet" type="text/css" href="graph.css">
 
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
@@ -19,7 +16,7 @@
         <script type="text/javascript" src="jquery.color.js"></script>
         <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
         <script language="javascript" type="text/javascript" src="jsr_class.js"></script>
-        <script language="javascript" type="text/javascript" src="graph_new.js"></script>
+        <script language="javascript" type="text/javascript" src="graph.js"></script>
 
 
 
@@ -32,8 +29,6 @@
             var bstatmsg ="";
             var statmsg = "";
             $(document).ready(function(){
-
-
 
                 $(".trigger").click(function(){
                     $(".panel").toggle("fast");
@@ -86,51 +81,35 @@
             });
         </script>
 
-        <style>
-
-            </style>
-
     </head>
     
     <body>
 
     <div id="main-map">
-
-
-    <!-- div class="wrapper"-->
-            <!--div id="wrapper-content" role="main"-->
-                <!--div class="main" id="main-content" role="main"-->
-                    <!--div class="col-8"-->
-                        <!--[if lte IE 8]>
-                                <p class="ie-alert">This site uses HTML elements that are not recognized by Internet Explorer 8 and below. As a result, the site will not be rendered appropriately. To correct this, please upgrade to Internet Explorer 9, or use another browser.</p>
-                        <[endif]-->
-
          <div id="headarea">
-                        <div-- id="toptxt">
+                        <div id="toptxt">
                                 <div id="beta"><img style="width: 70px;margin-top: 2px" src="beta.png"></div>
                                 <div id="appname">CU Experts Map</div>
-                                <!--div id="beta" ><h3> <div id="betabutton" style="background-color: red">beta</div> <div id="betatext">Improvements coming soon</div> </h3></div-->
+                                <div id="queryform">
+                                    <input name="query" id="query" list="rtopiclist" size="34" accesskey="q" type="text" onkeydown="queryKeyDown(event);">
+                                    <datalist id="rtopiclist">
+                                        <select style="display:none;"></select>
+                                   </datalist>
+                                   <!-- hide cutoff for now -->
+                                   <label style="visibility: hidden" id="cutofflabel" for="queryCutoff">Cutoff:</label>
+                                   <input style="visibility: hidden" id="queryCutoff" name="queryCutoff" type="text" title="Cutoff"  value="10000" >
+                                   <input type="submit" value="Search" id="add" type="button" onclick="addKwd();">
+                                   <input value="Reset" id="resetButton" type="submit" onclick="reset()" disabled>
 
-                        <div id="queryform">
-                               <input name="query" id="query" list="rtopiclist" size="34" accesskey="q" type="text" onkeydown="queryKeyDown(event);">
-                               <datalist id="rtopiclist">
-                                    <select style="display:none;"></select>
-                               </datalist>
-                               <!-- hide cutoff for now -->
-                               <label style="visibility: hidden" id="cutofflabel" for="queryCutoff">Cutoff:</label>
-                               <input style="visibility: hidden" id="queryCutoff" name="queryCutoff" type="text" title="Cutoff"  value="10000" >
-                               <input type="submit" value="Search" id="add" type="button" onclick="addKwd();">
-                               <input value="Reset" id="resetButton" type="submit" onclick="reset()" disabled>
-
-                        </div> <!-- id="queryform" -->
-                        </div> <!--queryform -->
+                                 </div> <!-- /queryform -->
+                        </div> <!-- /toptxt -->
                         <div id="instrtxt">
-                        <BR> Build a map of experts by typing in related research terms above or pick from suggested terms to the right.
-                        <a style="color: blue; display:inline-block; float:right; line-height:32px; height:32px; cursor:pointer" onclick="showhideadvanced(this)">Show advanced</a>
-                        <a style="color: blue; margin-right: 50px; display:inline-block; float:right; line-height:32px; height:32px; cursor:pointer" HREF="mailto:vivo@colorado.edu?subject=CU Experts Feedback&body=Dear User,%0D%0A%0D%0AWhile the CU Experts Map is in beta, we value feedback from your experience.%0D%0APlease tell us here if there are features you would like to see and how you are using this information.%0D%0A
+                            <BR> Build a map of experts by typing in related research terms above or pick from suggested terms to the right.
+                             <a style="color: blue; display:inline-block; float:right; line-height:32px; height:32px; cursor:pointer" onclick="showhideadvanced(this)">Show advanced</a>
+                             <a style="color: blue; margin-right: 50px; display:inline-block; float:right; line-height:32px; height:32px; cursor:pointer" HREF="mailto:vivo@colorado.edu?subject=CU Experts Feedback&body=Dear User,%0D%0A%0D%0AWhile the CU Experts Map is in beta, we value feedback from your experience.%0D%0APlease tell us here if there are features you would like to see and how you are using this information.%0D%0A
 %0D%0AThanks very much,%0D%0A
 The FIS Team at CU Boulder">Give us feedback</a>
-                    </div>
+                        </div>
 
 
                         <hr style="clear:both;">
@@ -159,12 +138,12 @@ The FIS Team at CU Boulder">Give us feedback</a>
                                 <input type="submit" onclick="restoreDefaults()" value="Default">
                             </p>
                         </div>
-    </div>
-                        <!-- Tier bar customisation -->
-<!--hr-->
-                        <div id="container">
+        </div> <!-- /headarea -->
+        <!-- Tier bar customisation -->
 
-                            <!-- side panel div coe -->
+        <div id="container">
+
+            <!-- side panel div coe -->
                             <div class="leftpanel">
                                 <div class="leftpanelcontainer1" >
                                     <div class="panel" id="StatusPanel" style="color:black">
@@ -292,14 +271,9 @@ The FIS Team at CU Boulder">Give us feedback</a>
                             <form id="download" method="post" style="display:none">
                                 <textarea name="content" id="exportContent"></textarea>
                             </form>
-                        <!--/div-->
-                    <!--/div-->
-                <!--/div-->
-        
-            <!--/div--> <!-- #wrapper-content -->
         
         <hr class="g-clear-floats" />
-         </div>
+ </div> <!-- /main-map -->
 
     </body>
 </html>
