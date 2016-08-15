@@ -649,7 +649,7 @@ var loadCapability = function() {
         disableSubButton();
         var query = queryQueue.pop();
         var res;
-        var jsonurl = "https://vivo.colorado.edu/es/fis/person/_search?q=researchArea.name:%22" + encodeURIComponent(query) + "%22&size=500&callback=ipretResults";
+        var jsonurl = "https://experts.colorado.edu/es/fis/person/_search?q=researchArea.name:%22" + encodeURIComponent(query) + "%22&size=500&callback=ipretResults";
         var request = new JSONscriptRequest(jsonurl);
         request.buildScriptTag();
         request.addScriptTag();
@@ -1221,7 +1221,7 @@ $(document).ready(function() {
         !!(document.createElement('datalist') && window.HTMLDataListElement);
 
     // The JSON list url
-    var esurl = "https://vivo.colorado.edu/es/fis/person/_search?callback=?&source=";
+    var esurl = "https://experts.colorado.edu/es/fis/person/_search?";
     var esdsl = {
         "size": 0,
         "aggs" : {
