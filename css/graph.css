@@ -507,7 +507,7 @@ a.trigger{
     padding-right: 50px;
     padding-bottom: 10px;
     padding-left: 15px;
-    background:#eeeeee url(plus.png) 85% 55% no-repeat;
+    background:#eeeeee url(../images/plus.png) 85% 55% no-repeat;
 }
 
 a.trigger:hover{
@@ -529,11 +529,11 @@ a.trigger:hover{
     -moz-border-radius-bottomleft: 0px;
     -webkit-border-bottom-left-radius: 0px;
     display: block;
-    background:#dddddd url(plus.png) 90% 55% no-repeat;
+    background:#dddddd url(../images/plus.png) 90% 55% no-repeat;
 }
 
 a.active.trigger {
-    background:#ddd url(minus.png) 90% 55% no-repeat;
+    background:#ddd url(../images/minus.png) 90% 55% no-repeat;
 }
 
 /**** Left Panel 2 ***/
@@ -605,7 +605,7 @@ a.trigger2{
     padding-right: 50px;
     padding-bottom: 10px;
     padding-left: 15px;
-    background:#eeeeee url(plus.png) 85% 55% no-repeat;
+    background:#eeeeee url(../images/plus.png) 85% 55% no-repeat;
 }
 
 a.trigger2:hover{
@@ -627,11 +627,11 @@ a.trigger2:hover{
     -moz-border-radius-bottomleft: 0px;
     -webkit-border-bottom-left-radius: 0px;
     display: block;
-    background:#dddddd url(plus.png) 90% 55% no-repeat;
+    background:#dddddd url(../images/plus.png) 90% 55% no-repeat;
 }
 
 a.active.trigger2 {
-    background:#ddd url(minus.png) 90% 55% no-repeat;
+    background:#ddd url(../images/minus.png) 90% 55% no-repeat;
 }
 
 /**** Left Panel 3 ***/
@@ -702,7 +702,7 @@ a.trigger3{
     padding-right: 50px;
     padding-bottom: 10px;
     padding-left: 15px;
-    background:#eeeeee url(plus.png) 85% 55% no-repeat;
+    background:#eeeeee url(../images/plus.png) 85% 55% no-repeat;
 }
 
 a.trigger3:hover{
@@ -724,11 +724,11 @@ a.trigger3:hover{
     -moz-border-radius-bottomleft: 0px;
     -webkit-border-bottom-left-radius: 0px;
     display: block;
-    background:#dddddd url(plus.png) 90% 55% no-repeat;
+    background:#dddddd url(../images/plus.png) 90% 55% no-repeat;
 }
 
 a.active.trigger3 {
-    background:#ddd url(minus.png) 90% 55% no-repeat;
+    background:#ddd url(../images/minus.png) 90% 55% no-repeat;
 }
 
 /*** Query result status info ***/
