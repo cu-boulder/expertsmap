@@ -399,8 +399,6 @@ var FullResultQueryUnit = function(capabilities, person) {
 FullResultQueryUnit.prototype.fetch = function() {
     var query = this.person.queryText(this.capabilities);
     query = encodeURI(query);
-//    var jsonurl = "http://search-au.funnelback.com/s/search.html?collection=unimelb-researchers&type.max_clusters=40&&topic.max_clusters=40&form=faeJSON&query=" + query + "&num_ranks=1&callback=ipretFullResults"
-//    var jsonurl = "http://search-au.funnelback.com/s/search.html?collection=unimelb-researchers&type.max_clusters=40&&topic.max_clusters=40&form=faeJSON&query=" + query + "&num_ranks=1&callback=ipretFullResults"
     var res1 = "http://search-au.funnelback.com/s/search.html?collection=unimelb-researchers&type.max_clusters=40&&topic.max_clusters=40&form=faeJSON&query=" + query + "&num_ranks=1&callback=ipretFullResults"
     var request = new JSONscriptRequest(jsonurl);
     request.buildScriptTag();
@@ -642,6 +640,19 @@ DetailsPanel.makebarchart = function(deptNames, departments) {
     return div;
 };
             
+
+var loadMap = function(jsonurl,jsondsl, callback){
+
+        // Make the ajax call
+        $.getJSON(jsonurl, jsondsl, function(list){
+            // create the rtopics array
+            // Call the function that will create the options
+            // But sort the array first (for better user experience)
+            //callback(ipretResults(list,jsonurl));
+            ipretResults(list,jsonurl);
+        });
+    }
+
 var loadCapability = function() {
     if (hidden) unhide();
     if (!queryQueue.length) finish();
@@ -649,10 +660,10 @@ var loadCapability = function() {
         disableSubButton();
         var query = queryQueue.pop();
         var res;
-        var jsonurl = "https://experts.colorado.edu/es/fis/person/_search?q=researchArea.name:%22" + encodeURIComponent(query) + "%22&size=500&callback=ipretResults";
-        var request = new JSONscriptRequest(jsonurl);
-        request.buildScriptTag();
-        request.addScriptTag();
+        var jsonurl1 = "/es/fis/person/_search?q=researchArea.name:%22" + encodeURIComponent(query) + "%22&size=500";
+        var jsondsl = {
+       }
+	loadMap(jsonurl1,jsondsl);
     }
 }
 var addKwd = function(kwd) {
@@ -1221,12 +1232,13 @@ $(document).ready(function() {
         !!(document.createElement('datalist') && window.HTMLDataListElement);
 
     // The JSON list url
-    var esurl = "https://experts.colorado.edu/es/fis/person/_search?";
+    //var esurl = "https://experts.colorado.edu/es/fis/person/_search?";
+    var esurl = "/es/fis/person/_search?source_content_type=application%2Fjson&";
     var esdsl = {
-        "size": 0,
+        "from":0, "size": 0,
         "aggs" : {
             "researchAreas" : {
-                "terms" : {"field" : "researchArea.name.exact", "size": 0}
+                "terms" : {"field" : "researchArea.name.keyword"}
             }
         }
     }
@@ -1269,7 +1281,6 @@ $(document).ready(function() {
             callback(rtopics.sort());
         });
     }
-
 
 
     // jQuery OnLoad ...
