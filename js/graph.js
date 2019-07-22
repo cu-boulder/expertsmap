@@ -1238,7 +1238,7 @@ $(document).ready(function() {
         "from":0, "size": 0,
         "aggs" : {
             "researchAreas" : {
-                "terms" : {"field" : "researchArea.name.keyword"}
+                "terms" : {"field" : "researchArea.name.keyword","size":5000}
             }
         }
     }
