@@ -1239,7 +1239,8 @@ $(document).ready(function() {
 
     // The JSON list url
     //var esurl = "https://experts.colorado.edu/es/fis/person/_search?";
-    var esurl = "/es/fis/person/_search?source_content_type=application%2Fjson&";
+    // var esurl = "/es/fis/person/_search?source_content_type=application%2Fjson&";
+    var esurl = "https://search-experts-direct-cz3fpq4rlxcbn5z27vzq4mpzaa.us-east-2.es.amazonaws.com/fispeople-v1/_search?source_content_type=application%2Fjson&";
     var esdsl = {
         "from":0, "size": 0,
         "aggs" : {
