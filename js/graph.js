@@ -639,19 +639,25 @@ DetailsPanel.makebarchart = function(deptNames, departments) {
     });
     return div;
 };
-            
 
 var loadMap = function(jsonurl,jsondsl, callback){
 
         // Make the ajax call
-        $.getJSON(jsonurl, jsondsl, function(list){
+        $.ajax({
+            url:jsonurl,
+            data: jsondsl,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Basic " + btoa('anon:anonyM0us!'));
+            },
+            success: function(list){
             // create the rtopics array
             // Call the function that will create the options
             // But sort the array first (for better user experience)
             //callback(ipretResults(list,jsonurl));
             ipretResults(list,jsonurl);
-        });
+        }});
     }
+            
 
 var loadCapability = function() {
     if (hidden) unhide();
@@ -660,7 +666,7 @@ var loadCapability = function() {
         disableSubButton();
         var query = queryQueue.pop();
         var res;
-        var jsonurl1 = "/es/fis/person/_search?q=researchArea.name:%22" + encodeURIComponent(query) + "%22&size=500";
+        var jsonurl1 = "https://search-experts-direct-cz3fpq4rlxcbn5z27vzq4mpzaa.us-east-2.es.amazonaws.com/fispeople-v1/_search?q=researchArea.name:%22" + encodeURIComponent(query) + "%22&size=500";
         var jsondsl = {
        }
 	loadMap(jsonurl1,jsondsl);
@@ -1265,12 +1271,18 @@ $(document).ready(function() {
 
     }
 
-
     function loadDatas( callback ){
 
         // Make the ajax call
-        $.getJSON(esurl, esdslreq, function(list){
-            // create the rtopics array
+        $.ajax({
+            //getJSON create the rtopics array
+            dataType: "json",
+            url: esurl,
+            data: esdslreq,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Basic " + btoa('anon:anonyM0us!'));
+            },
+            success: function(list) {
             var rtopics =[];
             var rbuckets=list.aggregations.researchAreas.buckets;
             for(var i=0; i < rbuckets.length; i++){
@@ -1279,8 +1291,9 @@ $(document).ready(function() {
             // Call the function that will create the options
             // But sort the array first (for better user experience)
             callback(rtopics.sort());
-        });
+        }});
     }
+
 
 
     // jQuery OnLoad ...
